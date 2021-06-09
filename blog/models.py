@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from agro_user.models import AgroUser
 # from django.contrib.auth.models import AbstractUser
 # class ArgoUser(AbstractUser):
 #     pass
@@ -23,7 +23,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    user = models.ForeignKey(ArgoUser, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True)
+    user = models.ForeignKey(AgroUser, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True)
     slug = models.SlugField(unique=True)
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
     title = models.CharField(max_length=255, verbose_name='Наименование')
@@ -32,7 +32,7 @@ class Post(models.Model):
     image = models.ImageField(verbose_name='Изображение')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
-    favourite = models.ManyToManyField(ArgoUser, related_name="fav_post", blank=True)
+    favourite = models.ManyToManyField(AgroUser, related_name="fav_post", blank=True)
 
     def __str__(self):
         return self.title
@@ -47,7 +47,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(ArgoUser, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(AgroUser, related_name='comments', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     email = models.EmailField()
     body = models.TextField()

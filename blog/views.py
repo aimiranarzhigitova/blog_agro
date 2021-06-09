@@ -3,7 +3,6 @@ from rest_framework import generics
 from django_filters import rest_framework as filters
 from blog.models import *
 from blog.serializers import *
-from blog.permissions import *
 
 
 class PostListView(generics.ListAPIView):
@@ -12,7 +11,7 @@ class PostListView(generics.ListAPIView):
     queryset = Post.objects.select_related('user', 'category')
     serializer_class = PostSerializer
     filter_backends = (filters.DjangoFilterBackend, )
-    filterset_fields = ('title', 'category', 'created_at')
+    filterset_fields = ('title', 'category', 'favourite')
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
@@ -25,7 +24,6 @@ class PostCreateView(generics.CreateAPIView):
     only authenticated user
     """
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticated, )
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -41,16 +39,14 @@ class PostDetailView(generics.RetrieveAPIView):
 class PostDeleteView(generics.DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
 
 
 class PostUpdateView(generics.UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, )
 
 
-class CategoryView(generics.ListAPIView):
+class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
@@ -58,7 +54,6 @@ class CategoryView(generics.ListAPIView):
 class CommentListCreateView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -67,6 +62,6 @@ class CommentListCreateView(generics.ListCreateAPIView):
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+
 
 
