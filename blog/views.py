@@ -12,7 +12,7 @@ class PostListView(generics.ListAPIView):
     queryset = Post.objects.select_related('user', 'category')
     serializer_class = PostSerializer
     filter_backends = (filters.DjangoFilterBackend, )
-    filterset_fields = ('title', 'category', 'created')
+    filterset_fields = ('title', 'category', 'created_at')
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
@@ -28,7 +28,7 @@ class PostCreateView(generics.CreateAPIView):
     permission_classes = (permissions.IsAuthenticated, )
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(user=self.request.user)
 
 
 class PostDetailView(generics.RetrieveAPIView):
