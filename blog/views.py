@@ -1,16 +1,18 @@
+from django.db import connection
 from rest_framework import generics
 from django_filters import rest_framework as filters
 from blog.models import *
 from blog.serializers import *
 from blog.permissions import *
 
+
 class PostListView(generics.ListAPIView):
     """Endpoint for retrieve all posts
     """
-    queryset = Post.objects.select_related('owner', 'category')
-    serializer_class = serializers.PostSerializer
+    queryset = Post.objects.select_related('user', 'category')
+    serializer_class = PostSerializer
     filter_backends = (filters.DjangoFilterBackend, )
-    filterset_fields = ('title', 'category')
+    filterset_fields = ('title', 'category', 'created')
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
