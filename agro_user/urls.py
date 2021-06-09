@@ -3,6 +3,6 @@ from django.urls import path
 from agro_user import views
 
 urlpatterns = [
-    path('api/v1/register/', views.RegisterAPIView.as_view()),
-    path('api/v1/login/', views.LoginAPIView.as_view()),
+    path('register/', views.RegisterAPIView.as_view()),
+    path('login/', views.LoginAPIView.as_view()),
 ]

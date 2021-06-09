@@ -4,8 +4,8 @@ from .swagger import urlpatterns as docurlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Post/', include('blog.urls')),
-    path('User/', include('agro_user.urls')),
+    path('api/v1/post/', include('blog.urls')),
+    path('api/v1/user/', include('agro_user.urls')),
 ]
 
 

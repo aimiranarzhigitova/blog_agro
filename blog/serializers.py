@@ -5,13 +5,13 @@ from blog.models import *
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = "__all__"
+        fields = ('category', 'title', 'descriptions', 'content', 'image', 'price', 'favourite', )
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ('title', )
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -19,4 +19,4 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = "__all__"
+        fields = ('user', 'post', 'email', 'body', )

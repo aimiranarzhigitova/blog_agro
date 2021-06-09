@@ -1,4 +1,4 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import BasePermission, AllowAny
 from rest_framework.exceptions import PermissionDenied
 
 class IsClient(BasePermission):
@@ -9,6 +9,6 @@ class IsClient(BasePermission):
     def has_permission(self, request, view):
         try:
             request.user.is_client
-        except PermissionError:
+        except:
             raise PermissionDenied('У вас нету прав доступа')
         return bool(request.user and request.user.is_client)

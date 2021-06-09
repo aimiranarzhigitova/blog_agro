@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'agro_user',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
 ]
 
@@ -151,3 +152,15 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'agro_user.AgroUser'
 
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Basic': {
+            'type': 'basic'
+      },
+      'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}

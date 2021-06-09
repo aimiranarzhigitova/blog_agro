@@ -8,9 +8,13 @@ from agro_user.models import AgroUser
 from agro_user.serializers import RegisterSerializer, LoginSerializer
 from rest_framework.permissions import *
 from agro_user.permissions import *
+from drf_yasg.utils import swagger_auto_schema
+
 
 class RegisterAPIView(APIView):
+    permission_classes = (AllowAny,)
 
+    @swagger_auto_schema(request_body=RegisterSerializer)
     def post(self, request, *args, **kwargs):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -22,7 +26,9 @@ class RegisterAPIView(APIView):
 
 
 class LoginAPIView(APIView):
+    permission_classes = (AllowAny,)
 
+    @swagger_auto_schema(request_body=LoginSerializer)
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -33,16 +39,6 @@ class LoginAPIView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND,
                             data={'message': 'User not found or does not exist'})
         else:
-            try:
-                token = Token.objects.get(user=user)
-            except Token.DoesNotExist:
-                token = Token.objects.create(user=user)
-            return Response(data={'token': token.key},
+            token = Token.objects.get_or_create(user=user)
+            return Response(data={'token': str(token)},
                             status=status.HTTP_200_OK)
-
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            self.permission_classes = (IsClient,)
-        else:
-            self.permission_classes = (AllowAny,)
-        return [permission() for permission in self.permission_classes]
