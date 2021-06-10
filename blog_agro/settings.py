@@ -81,10 +81,14 @@ WSGI_APPLICATION = 'blog_agro.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+'default': {
+'ENGINE': 'django.db.backends.postgresql_psycopg2',
+'NAME': 'agro',
+'USER': 'admin',
+'PASSWORD': 'admin',
+'HOST': '127.0.0.1',
+'PORT': '5432'
+}
 }
 
 
@@ -130,12 +134,12 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static_root'),
+    os.path.join(BASE_DIR, 'staticfiles'),
 )
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
