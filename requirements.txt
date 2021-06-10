@@ -5,8 +5,10 @@ config==0.5.0.post0
 coreapi==2.3.3
 coreschema==0.0.4
 decouple==0.0.7
+dj-database-url==0.5.0
 Django==3.2.4
 django-filter==2.4.0
+django-on-heroku==1.1.2
 djangorestframework==3.12.4
 drf-yasg==1.20.0
 gunicorn==20.1.0
@@ -26,4 +28,5 @@ ruamel.yaml.clib==0.2.2
 sqlparse==0.4.1
 uritemplate==3.0.1
 urllib3==1.26.5
+v==0.0.0
 whitenoise==5.2.0
