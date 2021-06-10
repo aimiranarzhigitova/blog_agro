@@ -30,7 +30,7 @@ class PostListView(generics.ListAPIView):
     queryset = Post.objects.select_related('user', 'category')
     serializer_class = PostSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('title', 'category', 'favourite')
+    filterset_fields = ('title', 'category', )
 
     def get_permissions(self):
         if self.request.method == 'POST':
