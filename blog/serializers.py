@@ -2,6 +2,12 @@ from rest_framework import serializers
 from blog.models import *
 
 
+class PostSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('category', 'title')
+
+
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post

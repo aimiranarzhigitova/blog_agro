@@ -1,11 +1,11 @@
 from django.contrib.auth import authenticate
 from django.shortcuts import render
-from rest_framework import status
+from rest_framework import status, generics, filters
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from agro_user.models import AgroUser
-from agro_user.serializers import RegisterSerializer, LoginSerializer
+from agro_user.serializers import RegisterSerializer, LoginSerializer, AgroUserSearchSerializer
 from rest_framework.permissions import *
 from agro_user.permissions import *
 from drf_yasg.utils import swagger_auto_schema
@@ -42,3 +42,11 @@ class LoginAPIView(APIView):
             token = Token.objects.get_or_create(user=user)
             return Response(data={'token': str(token)},
                             status=status.HTTP_200_OK)
+
+
+
+class AgroUserSearchView(generics.ListAPIView):
+    queryset = AgroUser.objects.all()
+    serializer_class = AgroUserSearchSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username']

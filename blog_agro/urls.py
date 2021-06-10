@@ -6,6 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/post/', include('blog.urls')),
     path('api/v1/user/', include('agro_user.urls')),
+
 ]
 
 

@@ -73,3 +73,10 @@ class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(min_length=2, max_length=20, required=True)
     email = serializers.EmailField(required=True)
     password = serializers.CharField(min_length=8, max_length=20, required=True, write_only=True)
+
+
+
+class AgroUserSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AgroUser
+        fields = ('id', 'username',)
