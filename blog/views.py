@@ -14,7 +14,7 @@ class PostSearchView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSearchSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['username']
+    search_fields = ['title', 'category']
 
 
 class PostPagination(PageNumberPagination):
