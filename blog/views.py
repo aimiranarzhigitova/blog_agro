@@ -91,7 +91,7 @@ class PostUpdateView(generics.UpdateAPIView):
     permission_classes = (IsClient,)
 
 
-class CategoryListCreateView(generics.ListAPIView):
+class CategoryListView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
