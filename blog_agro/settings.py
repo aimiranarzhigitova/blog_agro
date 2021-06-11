@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'drf_yasg',
     'blog.apps.BlogConfig',
     'agro_user',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -177,3 +179,10 @@ SWAGGER_SETTINGS = {
 
 
 django_on_heroku.settings(locals())
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+]
