@@ -5,19 +5,19 @@ from blog.models import *
 class PostSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('category', 'title')
+        fields = ('id', 'category', 'title')
 
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('category', 'title', 'descriptions', 'content', 'image', 'price', 'favourite', )
+        fields = ('id', 'category', 'title', 'descriptions', 'content', 'image', 'price', 'favourite', )
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('title', )
+        fields = ('id', 'title', )
 
 
 # class CommentSerializer(serializers.ModelSerializer):
