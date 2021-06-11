@@ -101,24 +101,24 @@ class CategoryListCreateView(generics.ListAPIView):
         else:
             self.permission_classes = (AllowAny,)
         return [permission() for permission in self.permission_classes]
-
-
-class CommentListCreateView(generics.ListCreateAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            self.permission_classes = (IsClient,)
-        else:
-            self.permission_classes = (AllowAny,)
-        return [permission() for permission in self.permission_classes]
-
-
-class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = (IsClient,)
+#
+#
+# class CommentListCreateView(generics.ListCreateAPIView):
+#     queryset = Comment.objects.all()
+#     serializer_class = CommentSerializer
+#
+#     def perform_create(self, serializer):
+#         serializer.save(user=self.request.user)
+#
+#     def get_permissions(self):
+#         if self.request.method == 'POST':
+#             self.permission_classes = (IsClient,)
+#         else:
+#             self.permission_classes = (AllowAny,)
+#         return [permission() for permission in self.permission_classes]
+#
+#
+# class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Comment.objects.all()
+#     serializer_class = CommentSerializer
+#     permission_classes = (IsClient,)

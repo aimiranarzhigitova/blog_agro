@@ -20,9 +20,9 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('title', )
 
 
-class CommentSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
-
-    class Meta:
-        model = Comment
-        fields = ('user', 'post', 'email', 'body', )
+# class CommentSerializer(serializers.ModelSerializer):
+#     user = serializers.ReadOnlyField(source='user.username')
+#
+#     class Meta:
+#         model = Comment
+#         fields = ('user', 'post', 'email', 'body', )
