@@ -9,7 +9,7 @@ class PostSearchSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    category = serializers.SlugRelatedField(queryset=Category.objects, slug_field='name')
+    category = serializers.SlugRelatedField(queryset=Category.objects, slug_field='title')
     title = serializers.CharField(required=True)
     description = serializers.CharField(required=False)
     image = serializers.ImageField(required=True)
