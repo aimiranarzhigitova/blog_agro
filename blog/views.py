@@ -17,19 +17,19 @@ class PostSearchView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'category']
 
-#
-# class PostPagination(PageNumberPagination):
-#     page_size = 9
-#     page_size_query_param = 'page_size'
-#     max_page_size = 12
-#
-#     def get_paginated_response(self, data):
-#         return Response(OrderedDict([
-#             ('objects_count', self.page.paginator.count),
-#             ('next', self.get_next_link()),
-#             ('previous', self.get_previous_link()),
-#             ('items', data)
-#         ]))
+
+class PostPagination(PageNumberPagination):
+    page_size = 6
+    page_size_query_param = 'page_size'
+    max_page_size = 9
+
+    def get_paginated_response(self, data):
+        return Response(OrderedDict([
+            ('objects_count', self.page.paginator.count),
+            ('next', self.get_next_link()),
+            ('previous', self.get_previous_link()),
+            ('items', data)
+        ]))
 
 
 class PostListView(generics.ListAPIView):
