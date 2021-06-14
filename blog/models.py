@@ -28,7 +28,6 @@ class Post(models.Model):
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE,  blank=False, null=False)
     title = models.CharField(max_length=255, verbose_name='Наименование',  blank=False, null=False)
     descriptions = models.CharField(max_length=150, verbose_name='Описание',  blank=False, null=False)
-    content = models.TextField(verbose_name='Текст', blank=False, null=False)
     image = models.ImageField(verbose_name='Изображение', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)

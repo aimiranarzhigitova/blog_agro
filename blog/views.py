@@ -1,3 +1,4 @@
+import requests
 from django.db import connection
 from collections import OrderedDict
 from django_filters.rest_framework import DjangoFilterBackend
@@ -37,7 +38,7 @@ class PostListView(generics.ListAPIView):
     queryset = Post.objects.select_related('user', 'category')
     serializer_class = PostSerializer
     filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('title', 'category', )
+    filterset_fields = ('title', 'category',)
 
     def get_permissions(self):
         if self.request.method == 'POST':
