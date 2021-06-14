@@ -72,6 +72,8 @@ class PostDetailView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    Post.objects.filter(pub_date__year=2020).order_by('-pub_date', 'headline')
+
     def get_permissions(self):
         if self.request.method == 'POST':
             self.permission_classes = (IsClient,)
