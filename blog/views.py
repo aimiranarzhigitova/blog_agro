@@ -72,7 +72,7 @@ class PostDetailView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    Post.objects.filter(user__post=2020).order_by('-user__post', 'headline')
+    Post.objects.filter(user__post=2020).order_by('-user__post')
 
     def get_permissions(self):
         if self.request.method == 'POST':
