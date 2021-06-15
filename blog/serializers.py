@@ -9,13 +9,6 @@ class PostSearchSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    category = serializers.SlugRelatedField(queryset=Category.objects, slug_field='title')
-    title = serializers.CharField(required=True)
-    descriptions = serializers.CharField(required=False)
-    image = serializers.ImageField(required=True)
-    price = serializers.DecimalField(max_digits=10, decimal_places=2, required=True)
-    created_at = serializers.DateField(required=True)
-
     class Meta:
         model = Post
         fields = ('id', 'category', 'slug', 'title', 'descriptions', 'image', 'created_at', 'price', 'favourite')
